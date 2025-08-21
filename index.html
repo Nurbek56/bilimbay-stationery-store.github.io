@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Билимбай - Интернет-магазин канцтоваров</title>
+    <meta name="description" content="Билимбай- широкий выбор канцтоваров для школы, офиса и творчества. Быстрая доставка, выгодные цены.">
+    <meta property="og:title" content="Билимбай - Интернет-магазин канцтоваров">
+    <meta property="og:description" content="Широкий выбор канцтоваров для школы, офиса и творчества">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <h1>📚 Билимбай</h1>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Поиск товаров..." class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#catalog">Каталог</a></li>
+                    <li><a href="#new">Новинки</a></li>
+                    <li><a href="#sale">Скидки</a></li>
+                    <li><a href="#delivery">Доставка</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="cart-btn" id="cartBtn">
+                    🛒 Корзина
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Все для учебы и работы</h2>
+                <p>Широкий выбор качественных канцтоваров с быстрой доставкой</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" data-filter="школа">К школе</button>
+                    <button class="btn btn-secondary" data-filter="офис">Для офиса</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">✏️</div>
+                <div class="hero-card">📒</div>
+                <div class="hero-card">📎</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main class="main">
+    <div class="container">
+        <div class="main-content">
+            <!-- Filters Sidebar -->
+            <aside class="filters" id="filtersPanel">
+                <div class="filters-header">
+                    <h3>Фильтры</h3>
+                    <button class="filters-close" id="filtersClose">✕</button>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Категории</h4>
+                    <div class="filter-options">
+                        <label><input type="radio" name="category" value=""> Все</label>
+                        <label><input type="radio" name="category" value="Письменные"> Письменные</label>
+                        <label><input type="radio" name="category" value="Тетради и бумага"> Тетради и бумага</label>
+                        <label><input type="radio" name="category" value="Офис"> Офис</label>
+                        <label><input type="radio" name="category" value="Для творчества"> Для творчества</label>
+                        <label><input type="radio" name="category" value="Организация"> Организация</label>
+                        <label><input type="radio" name="category" value="Техника"> Техника</label>
+                    </div>
+                </div>
+
+
+                <div class="filter-group">
+                    <h4>Цвет</h4>
+                    <div class="color-filters">
+                        <label class="color-option">
+                            <input type="checkbox" name="color" value="синий">
+                            <span class="color-swatch" style="background: #2D6AE3"></span>
+                            синий
+                        </label>
+                        <label class="color-option">
+                            <input type="checkbox" name="color" value="чёрный">
+                            <span class="color-swatch" style="background: #000"></span>
+                            чёрный
+                        </label>
+                        <label class="color-option">
+                            <input type="checkbox" name="color" value="красный">
+                            <span class="color-swatch" style="background: #EF4444"></span>
+                            красный
+                        </label>
+                        <label class="color-option">
+                            <input type="checkbox" name="color" value="зелёный">
+                            <span class="color-swatch" style="background: #10B981"></span>
+                            зелёный
+                        </label>
+                        <label class="color-option">
+                            <input type="checkbox" name="color" value="жёлтый">
+                            <span class="color-swatch" style="background: #F5A524"></span>
+                            жёлтый
+                        </label>
+                        <label class="color-option">
+                            <input type="checkbox" name="color" value="белый">
+                            <span class="color-swatch" style="background: #FFF; border: 1px solid #ddd"></span>
+                            белый
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Цена</h4>
+                    <div class="price-range">
+                        <input type="number" id="minPrice" placeholder="от" min="0">
+                        <input type="number" id="maxPrice" placeholder="до" min="0">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Дополнительно</h4>
+                    <div class="filter-options">
+                        <label><input type="checkbox" id="onlyNew"> Только новинки</label>
+                        <label><input type="checkbox" id="onlySale"> Только со скидкой</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary apply-filters">Применить</button>
+            </aside>
+
+            <!-- Product Section -->
+            <section class="products-section">
+                <div class="products-header">
+                    <div class="products-controls">
+                        <button class="filters-toggle" id="filtersToggle">🔧 Фильтры</button>
+                        <div class="sort-controls">
+                            <label for="sortSelect">Сортировка:</label>
+                            <select id="sortSelect">
+                                <option value="default">По умолчанию</option>
+                                <option value="price-asc">Цена: по возрастанию</option>
+                                <option value="price-desc">Цена: по убыванию</option>
+                                <option value="rating">По популярности</option>
+                                <option value="new">Сначала новинки</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="results-count" id="resultsCount">Найдено товаров: 0</div>
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be rendered here -->
+                </div>
+
+                <div class="no-results" id="noResults" style="display: none;">
+                    <p>Товары не найдены. Попробуйте изменить параметры поиска.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<!-- Quick Collections -->
+<!-- Quick Collections -->
+<section class="collections" id="catalog">
+    <div class="container">
+        <h2>Популярные подборки</h2>
+        <div class="collections-grid">
+            <div class="collection-card" data-filter="школа">
+                <div class="collection-icon">🎒</div>
+                <h3>К школе</h3>
+                <p>Все необходимое для учебы</p>
+            </div>
+            <div class="collection-card" data-filter="офис">
+                <div class="collection-icon">💼</div>
+                <h3>Для офиса</h3>
+                <p>Профессиональные канцтовары</p>
+            </div>
+            <div class="collection-card" data-filter="творчество">
+                <div class="collection-icon">🎨</div>
+                <h3>Для художников</h3>
+                <p>Материалы для творчества</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- New Products Section -->
+<section class="new-products" id="new">
+    <div class="container">
+        <h2>✨ Новинки</h2>
+        <div class="new-products-content">
+            <div class="new-products-grid">
+                <div class="new-product-card">
+                    <div class="new-product-icon">🖊️</div>
+                    <h3>Ручки гелевые премиум</h3>
+                    <p>Новая линейка гелевых ручек с улучшенной формулой чернил</p>
+                    <span class="new-badge">Новинка</span>
+                </div>
+                <div class="new-product-card">
+                    <div class="new-product-icon">📱</div>
+                    <h3>Умные калькуляторы</h3>
+                    <p>Калькуляторы с Bluetooth и мобильным приложением</p>
+                    <span class="new-badge">Новинка</span>
+                </div>
+                <div class="new-product-card">
+                    <div class="new-product-icon">🎨</div>
+                    <h3>Эко-краски</h3>
+                    <p>Экологически чистые краски на водной основе</p>
+                    <span class="new-badge">Новинка</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sale Section -->
+<section class="sale-section" id="sale">
+    <div class="container">
+        <h2>🏷️ Скидки и акции</h2>
+        <div class="sale-content">
+            <div class="sale-banner">
+                <div class="sale-info">
+                    <h3>Скидка до 50% на школьные товары!</h3>
+                    <p>Подготовьтесь к новому учебному году с выгодой</p>
+                    <button class="btn btn-primary" data-filter="школа">Смотреть товары</button>
+                </div>
+                <div class="sale-visual">
+                    <div class="discount-badge">-50%</div>
+                </div>
+            </div>
+            <div class="promo-codes">
+                <h4>Промокоды</h4>
+                <div class="promo-list">
+                    <div class="promo-item">
+                        <span class="promo-code">SCHOOL10</span>
+                        <span class="promo-desc">Скидка 10% на школьные товары</span>
+                    </div>
+                    <div class="promo-item">
+                        <span class="promo-code">OFFICE15</span>
+                        <span class="promo-desc">Скидка 15% на офисные принадлежности</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Delivery Section -->
+<section class="delivery-section" id="delivery">
+    <div class="container">
+        <h2>🚚 Доставка</h2>
+        <div class="delivery-content">
+            <div class="delivery-options">
+                <div class="delivery-option">
+                    <div class="delivery-icon">🚚</div>
+                    <h3>Курьерская доставка</h3>
+                    <ul>
+                        <li>По Москве: 300 ₽</li>
+                        <li>По МО: 500 ₽</li>
+                        <li>Бесплатно от 2000 ₽</li>
+                        <li>Доставка в день заказа</li>
+                    </ul>
+                </div>
+                <div class="delivery-option">
+                    <div class="delivery-icon">📦</div>
+                    <h3>Почта России</h3>
+                    <ul>
+                        <li>По России: от 200 ₽</li>
+                        <li>Срок: 3-7 дней</li>
+                        <li>Наложенный платеж</li>
+                        <li>Отслеживание посылки</li>
+                    </ul>
+                </div>
+                <div class="delivery-option">
+                    <div class="delivery-icon">🏪</div>
+                    <h3>Самовывоз</h3>
+                    <ul>
+                        <li>Бесплатно</li>
+                        <li>Готов через 2 часа</li>
+                        <li>Пункты выдачи в городе</li>
+                        <li>Удобный график работы</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Payment Section -->
+<section class="payment-section" id="payment">
+    <div class="container">
+        <h2>💳 Способы оплаты</h2>
+        <div class="payment-content">
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <div class="payment-icon">💳</div>
+                    <h3>Банковские карты</h3>
+                    <p>Visa, MasterCard, МИР</p>
+                    <span class="payment-security">🔒 Безопасные платежи</span>
+                </div>
+                <div class="payment-method">
+                    <div class="payment-icon">💵</div>
+                    <h3>Наличными</h3>
+                    <p>При получении заказа</p>
+                    <span class="payment-security">✅ Проверка перед оплатой</span>
+                </div>
+                <div class="payment-method">
+                    <div class="payment-icon">📱</div>
+                    <h3>Электронные кошельки</h3>
+                    <p>ЮMoney, QIWI, WebMoney</p>
+                    <span class="payment-security">⚡ Мгновенное зачисление</span>
+                </div>
+                <div class="payment-method">
+                    <div class="payment-icon">🏦</div>
+                    <h3>Банковский перевод</h3>
+                    <p>Для юридических лиц</p>
+                    <span class="payment-security">📄 Документооборот</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Returns Section -->
+<section class="returns-section" id="returns">
+    <div class="container">
+        <h2>↩️ Возврат товаров</h2>
+        <div class="returns-content">
+            <div class="returns-info">
+                <div class="returns-policy">
+                    <h3>Условия возврата</h3>
+                    <ul class="returns-list">
+                        <li class="returns-item">
+                            <span class="returns-icon">📅</span>
+                            <div>
+                                <strong>14 дней</strong>
+                                <p>Срок для возврата товара</p>
+                            </div>
+                        </li>
+                        <li class="returns-item">
+                            <span class="returns-icon">📦</span>
+                            <div>
+                                <strong>Оригинальная упаковка</strong>
+                                <p>Товар должен быть в первоначальном виде</p>
+                            </div>
+                        </li>
+                        <li class="returns-item">
+                            <span class="returns-icon">🧾</span>
+                            <div>
+                                <strong>Документы</strong>
+                                <p>Чек или документ о покупке</p>
+                            </div>
+                        </li>
+                        <li class="returns-item">
+                            <span class="returns-icon">💰</span>
+                            <div>
+                                <strong>Возврат средств</strong>
+                                <p>В течение 10 рабочих дней</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="returns-process">
+                    <h3>Как вернуть товар</h3>
+                    <ol class="returns-steps">
+                        <li>Свяжитесь с нашей службой поддержки</li>
+                        <li>Получите номер возврата</li>
+                        <li>Упакуйте товар в оригинальную упаковку</li>
+                        <li>Передайте курьеру или отправьте почтой</li>
+                        <li>Получите возврат средств</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Билимбай</h4>
+                <p>Ваш надежный поставщик канцтоваров</p>
+            </div>
+            <div class="footer-section">
+                <h4>Контакты</h4>
+                <p>📞 +996 505 56 74 56</p>
+                <p>📧 info@kancmarket.ru</p>
+            </div>
+            <div class="footer-section">
+                <h4>Информация</h4>
+                <ul class="footer-links">
+                    <li class="footer-link-item">
+                        <a href="#delivery">🚚 Доставка</a>
+                    </li>
+                    <li class="footer-link-item">
+                        <a href="#payment">💳 Оплата</a>
+                    </li>
+                    <li class="footer-link-item">
+                        <a href="#returns">↩️ Возврат</a>
+                    </li>
+                    <li class="footer-link-item">
+                        <a href="#warranty">🛡️ Гарантия</a>
+                    </li>
+                    <li class="footer-link-item">
+                        <a href="#support">📞 Поддержка</a>
+                    </li>
+                    <li class="footer-link-item">
+                        <a href="#about">ℹ️ О компании</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 КанцМаркет. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Cart Panel -->
+<div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+        <h3>Корзина</h3>
+        <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-content" id="cartContent">
+        <div class="empty-cart" id="emptyCart">
+            <p>Корзина пуста</p>
+        </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+        <div class="promo-code">
+            <input type="text" id="promoInput" placeholder="Промокод">
+            <button id="applyPromo">Применить</button>
+        </div>
+        <div class="cart-total">
+            <div class="total-line">
+                <span>Сумма:</span>
+                <span id="cartSubtotal">0 ₽</span>
+            </div>
+            <div class="total-line discount" id="discountLine" style="display: none;">
+                <span>Скидка:</span>
+                <span id="cartDiscount">0 ₽</span>
+            </div>
+            <div class="total-line total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+        </div>
+        <button class="btn btn-primary checkout-btn" id="checkoutBtn">Оформить заказ</button>
+    </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal-overlay" id="checkoutModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>Оформление заказа</h3>
+            <button class="modal-close" id="checkoutClose">✕</button>
+        </div>
+        <form class="checkout-form" id="checkoutForm">
+            <div class="form-group">
+                <label for="customerName">Имя *</label>
+                <input type="text" id="customerName" required>
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="customerPhone">Телефон *</label>
+                <input type="tel" id="customerPhone" required>
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="customerEmail">Email *</label>
+                <input type="email" id="customerEmail" required>
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="customerCity">Город *</label>
+                <input type="text" id="customerCity" required>
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label>Способ доставки *</label>
+                <ul class="radio-group delivery-options">
+                    <li class="radio-item">
+                        <label><input type="radio" name="delivery" value="courier" required>
+                            <span class="delivery-icon">🚚</span> Курьер
+                        </label>
+                    </li>
+                    <li class="radio-item">
+                        <label><input type="radio" name="delivery" value="pickup" required>
+                            <span class="delivery-icon">🏪</span> Самовывоз
+                        </label>
+                    </li>
+                </ul>
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label>Способ оплаты *</label>
+                <ul class="radio-group payment-options">
+                    <li class="radio-item">
+                        <label><input type="radio" name="payment" value="cash" required>
+                            <span class="payment-icon">💵</span> При получении
+                        </label>
+                    </li>
+                    <li class="radio-item">
+                        <label><input type="radio" name="payment" value="card" required>
+                            <span class="payment-icon">💳</span> Картой
+                        </label>
+                    </li>
+                </ul>
+                <span class="error-message"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Оформить заказ</button>
+        </form>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="successModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>Заказ оформлен!</h3>
+            <button class="modal-close" id="successClose">✕</button>
+        </div>
+        <div class="success-content">
+            <p>Ваш заказ успешно оформлен!</p>
+            <p>Номер заказа: <strong id="orderNumber"></strong></p>
+            <p>Мы свяжемся с вами в ближайшее время.</p>
+            <button class="btn btn-primary" id="successOk">Понятно</button>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <h3>Меню</h3>
+            <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
+        </div>
+        <nav class="mobile-nav">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#new">✨ Новинки</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#sale">🏷️ Скидки</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#delivery">🚚 Доставка</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#support">📞 Поддержка</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#about">ℹ️ О нас</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
